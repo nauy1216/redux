@@ -59,3 +59,32 @@ export default function compose(...funcs: Function[]) {
         a(b(...args))
   )
 }
+
+/*
+var a = [
+  (v) => {
+    console.log('a')
+    return v + 1
+  },
+  (v) => {
+    console.log('b')
+    return v + 1
+  },
+  (v) => {
+    console.log('c')
+    return v + 1
+  }
+].reduce(
+  (a, b) =>
+    (...args) =>
+      a(b(...args))
+)(1)
+console.log(a)
+// c
+// b
+// a
+// 4
+
+
+
+*/

@@ -92,7 +92,8 @@ export default function createStore<
         )}'`
       )
     }
-
+    // enhancer增强器，也是applyMiddleware返回的compose合并的函数
+    // 对createStore返回的dispatch进行增强修改
     return enhancer(createStore)(
       reducer,
       preloadedState as PreloadedState<S>
@@ -107,11 +108,11 @@ export default function createStore<
     )
   }
 
-  let currentReducer = reducer
-  let currentState = preloadedState as S
-  let currentListeners: (() => void)[] | null = []
+  let currentReducer = reducer // 传入的root reducer
+  let currentState = preloadedState as S // 初始值
+  let currentListeners: (() => void)[] | null = [] // 监听redux变化的handler
   let nextListeners = currentListeners
-  let isDispatching = false
+  let isDispatching = false // 是否正在进行dispatching
 
   /**
    * This makes a shallow copy of currentListeners so we can use
@@ -346,7 +347,7 @@ export default function createStore<
         const unsubscribe = outerSubscribe(observeState)
         return { unsubscribe }
       },
-
+       // 提供给 new Observable 使用
       [$$observable]() {
         return this
       }

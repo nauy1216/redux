@@ -65,6 +65,7 @@ export default function applyMiddleware(
       reducer: Reducer<S, A>,
       preloadedState?: PreloadedState<S>
     ) => {
+      // 创建store对象
       const store = createStore(reducer, preloadedState)
       let dispatch: Dispatch = () => {
         throw new Error(
